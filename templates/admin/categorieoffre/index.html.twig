@@ -1,0 +1,37 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Categorieoffre index{% endblock %}
+
+{% block body %}
+    <h1>Categorieoffre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Logo</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorieoffre in categorieoffres %}
+            <tr>
+                <td>{{ categorieoffre.id }}</td>
+                <td><img src="{{ asset('/picture/' ~ categorieoffre.logo) }}"width="130" height="130"></td>
+                <td>{{ categorieoffre.nom }}</td>
+                <td>
+                    <a href="{{ path('categorieoffre_edit', {'id': categorieoffre.id}) }}" class="btn btn-dark">edit</a>
+                    <a href="{{ path('categorieoffre_delete', {'id': categorieoffre.id}) }}" class="btn btn-danger">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('categorieoffre_new') }}">Create new</a>
+{% endblock %}
